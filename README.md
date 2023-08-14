@@ -1,5 +1,6 @@
 ## Dataset
 Datasets for the project can be downloaded from the following link.
+In order to use the dataset, it is necessary to apply for the use of the data after signing up as a member.
 ```
 https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=&topMenu=&aihubDataSe=realm&dataSetSn=86
 ```
