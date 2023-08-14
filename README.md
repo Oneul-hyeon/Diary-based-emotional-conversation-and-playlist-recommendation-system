@@ -12,3 +12,4 @@ Create a folder for preprocessing as shown below and move two files to that loca
 mkdir Dataset
 cd Dataset
 ```
+You can create a dataset for modeling through the preprocessing.ipynb file in the Dataset folder.
