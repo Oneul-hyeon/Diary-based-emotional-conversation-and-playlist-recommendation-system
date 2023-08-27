@@ -11,3 +11,4 @@ torch==2.0.1 -f https://download.pytorch.org/whl/cu101/torch_stable.html
 # git+https://github.com/Oneul-hyeon/Modified-KoBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf
 git+https://github.com/ssut/py-hanspell.git
 soynlp
+git+https://github.com/SKTBrain/KoBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf
