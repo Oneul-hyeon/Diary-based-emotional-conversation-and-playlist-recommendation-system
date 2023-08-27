@@ -83,9 +83,9 @@ def correct_spelling(sentence) :
 bertmodel, vocab = get_pytorch_kobert_model()
 
 # 모델 불러오기
-from google.colab import drive
-drive.mount('/content/drive')
-model = torch.load('/content/drive/MyDrive/toy_project/model.pth')
+#from google.colab import drive
+#drive.mount('/content/drive')
+#model = torch.load('/content/drive/MyDrive/toy_project/model.pth')
 
 max_len = 64
 batch_size = 64
