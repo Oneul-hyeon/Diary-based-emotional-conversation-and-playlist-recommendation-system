@@ -39,7 +39,7 @@ def correct_spelling(sentence) :
 bertmodel, vocab = get_pytorch_kobert_model()
 
 # 모델 경로 지정
-model_path = '/content/drive/MyDrive/toy_ai/model.pth'
+model_path = 'model.pth'
 model = torch.load(model_path)
 
 max_len = 64
