@@ -50,3 +50,6 @@ This process allows you to run the preprocessing.ipynb file.
 Also, in this case, delete the library and package installation block at the top of the file.
 
 Since this file was created in Colab, it is necessary to reset the file path to load or save in order to proceed in the virtual environment.
+
+### Preprocessed Data
+The file should be stored in the root folder.
