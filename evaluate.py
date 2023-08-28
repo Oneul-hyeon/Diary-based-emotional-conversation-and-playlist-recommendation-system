@@ -16,6 +16,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from hanspell import spell_checker
 from soynlp.normalizer import emoticon_normalize
+from bert_utils import BERTClassifier, BERTDataset
 
 # koBERT
 from kobert.utils import get_tokenizer
@@ -27,51 +28,6 @@ from transformers.optimization import get_cosine_schedule_with_warmup
 
 device = torch.device('cuda') # GPU 사용
 
-class BERTClassifier(nn.Module):
-    def __init__(self,
-                 bert,
-                 hidden_size = 768,
-                 num_classes = 7,   # 감정 클래스 수로 조정
-                 dr_rate = None,
-                 params = None):
-        super(BERTClassifier, self).__init__()
-        self.bert = bert
-        self.dr_rate = dr_rate
-
-        self.classifier = nn.Linear(hidden_size , num_classes)
-        if dr_rate:
-            self.dropout = nn.Dropout(p = dr_rate)
-
-    def gen_attention_mask(self, token_ids, valid_length):
-        attention_mask = torch.zeros_like(token_ids)
-        for i, v in enumerate(valid_length):
-            attention_mask[i][:v] = 1
-        return attention_mask.float()
-
-    def forward(self, token_ids, valid_length, segment_ids):
-        attention_mask = self.gen_attention_mask(token_ids, valid_length)
-
-        _, pooler = self.bert(input_ids = token_ids, token_type_ids = segment_ids.long(), attention_mask = attention_mask.float().to(token_ids.device),return_dict = False)
-        if self.dr_rate:
-            out = self.dropout(pooler)
-        return self.classifier(out)
-
-# 각 데이터가 BERT 모델의 입력으로 들어갈 수 있도록 함수 정의
-class BERTDataset(Dataset):
-    def __init__(self, dataset, sent_idx, label_idx, bert_tokenizer, max_len,
-                 pad, pair):
-
-        transform = nlp.data.BERTSentenceTransform(
-            bert_tokenizer, max_seq_length=max_len, pad=pad, pair=pair)
-
-        self.sentences = [transform([i[sent_idx]]) for i in dataset]
-        self.labels = [np.int32(i[label_idx]) for i in dataset]
-    def __getitem__(self, i):
-        return (self.sentences[i] + (self.labels[i], ))
-
-    def __len__(self):
-        return (len(self.labels))
-
 # 맞춤법 및 이모티콘 교정 함수
 def correct_spelling(sentence) :
     spelled_sent = spell_checker.check(sentence)
@@ -82,20 +38,19 @@ def correct_spelling(sentence) :
 # KoBERT로부터 model, vocabulary 불러오기
 bertmodel, vocab = get_pytorch_kobert_model()
 
-# 모델 불러오기
-#from google.colab import drive
-#drive.mount('/content/drive')
-#model = torch.load('/content/drive/MyDrive/toy_project/model.pth')
+# 모델 경로 지정
+model_path = '/content/drive/MyDrive/toy_ai/model.pth'
+model = torch.load(model_path)
 
 max_len = 64
 batch_size = 64
-output = {0 : 'happiness',
-          1 : 'neutral',
-          2 : 'sadness',
-          3 : 'angry',
-          4 : 'surprise',
-          5 : 'disgust',
-          6 : 'fear'}
+output = {0 : '행복',
+          1 : '보통',
+          2 : '슬픔',
+          3 : '분노',
+          4 : '놀람',
+          5 : '불쾌함',
+          6 : '두려움'}
 
 # 모델 출력 함수
 def predict(text) :
