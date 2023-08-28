@@ -5,9 +5,13 @@ If you want to proceed with this project as a whole, proceed with the preprocess
 
 In this project, seven emotions are classified through text.
 
-'''
-행복, 보통, 슬픔, 분노, 놀람, 불쾌함, 두려움
-'''
+- 행복
+- 보통
+- 슬픔
+- 분노
+- 놀람
+- 불쾌함
+- 두려움
 
 ## Modeling
 The entire modeling process was carried out in the Modeling.ipynb file.
