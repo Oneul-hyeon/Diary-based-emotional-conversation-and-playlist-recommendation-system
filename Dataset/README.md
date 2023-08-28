@@ -1,15 +1,18 @@
+This process is a data preprocessing process for modeling.
+
 ## Dataset
 Datasets for the project can be downloaded from the following link.
 
 In order to use the dataset, it is necessary to apply for the use of the data after signing up as a member.
 ```
-https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=&topMenu=&aihubDataSe=realm&dataSetSn=86
+https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=263
 ```
-Select only the necessary data from the downloaded dataset.
-- Training_221115_add/원천데이터/감성대화말뭉치(최종데이터)_Training.xlsx
-- Validation_221115_add/원천데이터/감성대화말뭉치(최종데이터)_Validation.xlsx
+The following files were used as datasets used for modeling.
+'''
+- 5차년도_2차.csv
+'''
+Save the file to this folder.
 
-Create a folder for preprocessing as shown below and move two files to that location.
 ```
 mkdir Dataset
 cd Dataset
