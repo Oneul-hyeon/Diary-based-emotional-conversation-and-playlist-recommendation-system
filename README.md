@@ -32,7 +32,7 @@ The code for installing libraries and packages is at the top of Modeling.ipynb.
 You can proceed further by running the code.
 
 #### When using a virtual environment
-Currently, Colab's Python is version 3.10.
+Currently, Python is version 3.7.16.
 
 So follow the below method in anaconda terminal.
 
